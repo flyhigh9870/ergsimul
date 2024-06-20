@@ -1,22 +1,33 @@
 import './Sidebar.css';
-import { Link } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
+import { currentPageState } from '../stores/PageState';
 
 const Sidebar: React.FC = () => {
+  const [currentPage, setCurrentPage] = useRecoilState(currentPageState);
   return (
     <div className="sidebar">
       <ul>
-        <li>
-          <Link to="/about-erg" className="full-link">테스트1</Link>
+        <li
+          className={currentPage === 'about-erg' ? 'active' : ''}
+          onClick={() => setCurrentPage('about-erg')}
+        >
+          About Erg
         </li>
-        <li>
-          <Link to="/" className="full-link">테스트2</Link>
+        <li
+          className={currentPage === 'simulator' ? 'active' : ''}
+          onClick={() => setCurrentPage('simulator')}
+        >
+          Simulator
         </li>
-        <li>
-          <Link to="/materials" className="full-link">테스트3</Link>
+        <li
+          className={currentPage === 'materials' ? 'active' : ''}
+          onClick={() => setCurrentPage('materials')}
+        >
+          Materials
         </li>
       </ul>
     </div>
   );
-};
+}
 
 export default Sidebar;

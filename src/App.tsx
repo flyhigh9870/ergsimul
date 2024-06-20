@@ -1,25 +1,34 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Sidebar from './layouts/Sidebar';
 import AboutErg from './pages/AboutErg';
 import Simulator from './pages/Simulator';
 import Materials from './pages/Materials';
+import { useRecoilValue } from 'recoil';
+import { currentPageState } from './stores/PageState';
 function App() {
+  const currentPage = useRecoilValue(currentPageState);
+
+  const renderPage = () => {
+    switch (currentPage) {
+      case 'simulator':
+        return <Simulator />;
+      case 'about-erg':
+        return <AboutErg />;
+      case 'materials':
+        return <Materials />;
+      default:
+        return <Simulator />;
+    }
+  };
 
   return (
-    <Router basename="/ergsimul/">
-      <div>
-        <Sidebar />
-        <div className="content">
-          <Routes>
-            <Route path="/" element={<Simulator />} />
-            <Route path="/about-erg" element={<AboutErg />} />
-            <Route path="/materials" element={<Materials />} />
-          </Routes>
-        </div>
+    <div>
+      <Sidebar />
+      <div className="content">
+        {renderPage()}
       </div>
-    </Router>
-  )
+    </div>
+  );
 }
 
 export default App
