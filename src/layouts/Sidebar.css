@@ -1,6 +1,6 @@
 :root {
     --sidebar-width: 130px;
-    --sidebar-height: 60px;
+    --sidebar-height: 50px;
     --sidebar-bg-color: #f4f4f4;
     --sidebar-hover-color: #e0e0e0;
     --sidebar-border-color: #ddd;
@@ -23,7 +23,7 @@
 }
 
 .sidebar ul li {
-    padding: 15px 20px;
+    position: relative;
     text-align: center;
     border-bottom: 1px solid var(--sidebar-border-color);;
     cursor: pointer;
@@ -32,6 +32,16 @@
 
 .sidebar ul li:hover {
     background-color: var(--sidebar-hover-color);
+}
+
+.full-link {
+    display: block;
+    padding: 15px 20px; 
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+    box-sizing: border-box;
 }
 
 @media (max-width: 768px) {
@@ -45,9 +55,14 @@
         padding-top: 0;
     }
 
+    .sidebar ul {
+        display: flex;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+    }
     .sidebar ul li {
     display: inline-block;
-    padding: 5px 15px;
     width: 33.33%;
     box-sizing: border-box;
     border-bottom: none;
@@ -55,5 +70,8 @@
     }
     .sidebar ul li:last-child {
         border-right: none;
+    }
+    .full-link {
+        padding: 15px 0px;
     }
 }
